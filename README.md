@@ -4,11 +4,11 @@ Features:
 - Login
 
 Built with 
--Nodejs
--Express
--Postgresql
-- Hash
-- Zod
+- Nodejs
+- Express
+- PostgreSQL
+- Hash password and validation
+- Zod validation
 - Typescript
 
 ## Reader comfort:
