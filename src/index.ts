@@ -4,11 +4,15 @@ config();
 
 import express from "express";
 import cors from "cors";
+import errorGlobalHandler from "./middleware/error.handler";
 
 //Use server middleware by combine express and cors for server.
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+//Handling error thrown from ./src
+app.use(errorGlobalHandler);
 
 //Run the server
 const PORT = process.env.SERVER_PORT;
