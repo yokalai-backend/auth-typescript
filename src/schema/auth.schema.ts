@@ -24,3 +24,9 @@ export const inputValidation = z.object({
     .min(6, "Password too short")
     .max(12, "Password too long"),
 });
+
+export const HashFilter = z.object({
+  salt: z.instanceof(Buffer),
+  hash: z.instanceof(Buffer),
+  iterations: z.number(),
+});
