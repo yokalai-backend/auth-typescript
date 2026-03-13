@@ -7,5 +7,14 @@ export function hashPassword(password: string): HashProps {
   const iterations = 10000;
   const hash = crypto.pbkdf2Sync(password, salt, iterations, 64, "sha512");
 
-  return { salt, iterations, hash };
+  return { salt, hash, iterations };
+}
+
+export function verifyPassword(
+  password: string,
+  { salt, hash, iterations }: HashProps,
+): boolean {
+  const hashed = crypto.pbkdf2Sync(password, salt, iterations, 64, "sha512");
+
+  return hashed.equals(hash);
 }

@@ -23,6 +23,18 @@ const authRepo = {
 
     return user;
   },
+
+  login: async (name: string): Promise<UserDb> => {
+    const user = await queryOne<UserDb>("SELECT * FROM users WHERE name = $1", [
+      name,
+    ]);
+
+    if (!user) {
+      throw new AppError("User not exist", 404);
+    }
+
+    return user;
+  },
 };
 
 export default authRepo;
