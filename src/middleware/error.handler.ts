@@ -2,6 +2,7 @@
 
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../utils/app.error";
+import { ZodError } from "zod";
 
 export default async function errorGlobalHandler(
   error: any,
@@ -13,6 +14,14 @@ export default async function errorGlobalHandler(
     return res
       .status(error.statusCode)
       .json({ success: false, error: error.message });
+  }
+
+  if (error instanceof ZodError) {
+    const formatted = error.issues[0]!;
+
+    return res
+      .status(Number(formatted.code))
+      .json({ success: false, error: formatted.message });
   }
 
   return res

@@ -18,3 +18,13 @@ export const userOutDb = z.array(
       }),
     ),
 );
+
+//Auth validation
+export const inputValidation = z.object({
+  name: z.string().trim().min(1, "Name too short").max(30, "Name too long"),
+  password: z
+    .string()
+    .trim()
+    .min(6, "Password too short")
+    .max(12, "Password too long"),
+});
