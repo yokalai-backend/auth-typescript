@@ -1,22 +1,42 @@
-# Auth Typescript
-Features: 
-- Register
-- Login
+# Auth API (TypeScript)
 
-Built with 
-- Nodejs
+Simple authentication API built with Node.js, Express, and PostgreSQL.  
+This project was created to practice backend development and GitHub workflow.
+
+## Features
+
+- Register user
+- Login user
+- Password hashing
+- Input validation with Zod
+
+## Tech Stack
+
+- Node.js
 - Express
 - PostgreSQL
-- Hash password and validation
-- Zod validation
-- Typescript
+- TypeScript
+- Zod
+- bcrypt (password hashing)
 
-## Reader comfort:
-- Readable
-- Simple
-- Effective
-- Begginer
-- Clean code
+## Code Style
 
-How to run:
--npm run dev
+This project focuses on:
+
+- Readable code
+- Simple structure
+- Clean and maintainable backend architecture
+
+## Installation
+
+Clone the repository
+
+git clone https://github.com/yokalai-backend/auth-typescript.git
+
+Install dependencies
+
+npm install
+
+## Run the development server
+
+npm run dev
