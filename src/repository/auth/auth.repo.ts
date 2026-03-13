@@ -17,8 +17,8 @@ const authRepo = {
     }
 
     const user = await queryOne<UserDb>(
-      "INSERT INTO users (name, salt, iterations, hash) VALUES ($1, $2, $3) RETURNING name created_at role",
-      [name, salt, iterations, hash],
+      "INSERT INTO users (name, salt, hash, iterations) VALUES ($1, $2, $3) RETURNING name created_at role",
+      [name, salt, hash, iterations],
     );
 
     return user;
