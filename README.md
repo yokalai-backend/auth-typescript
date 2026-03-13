@@ -1,25 +1,22 @@
-# auth-typescript
-Description: I created this in order to understand how to work using github.
+# Auth Typescript
 Features: 
 - Register
 - Login
-- Clean code
 
-Framwork:
+Built with 
 -Nodejs
 -Express
 -Postgresql
-
-Tools:
 - Hash
 - Zod
 - Typescript
 
-Reader comfort:
+## Reader comfort:
 - Readable
 - Simple
 - Effective
 - Begginer
+- Clean code
 
 How to run:
 -npm run dev
