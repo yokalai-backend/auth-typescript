@@ -1,12 +1,9 @@
 //Register async function
-import type { ControllersParameters } from "../../types/req.res.next";
+import type { Request, Response } from "express";
 import { inputValidation } from "../../schema/auth.schema";
 import registerService from "../../services/auth/register";
 
-export default async function registerAuth({
-  req,
-  res,
-}: ControllersParameters) {
+export default async function registerAuth(req: Request, res: Response) {
   const result = await registerService(inputValidation.parse({ ...req.body }));
 
   return res

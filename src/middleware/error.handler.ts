@@ -19,10 +19,10 @@ export default async function errorGlobalHandler(
   if (error instanceof ZodError) {
     const formatted = error.issues[0]!;
 
-    return res
-      .status(Number(formatted.code))
-      .json({ success: false, error: formatted.message });
+    return res.status(400).json({ success: false, error: formatted.message });
   }
+
+  console.error(error);
 
   return res
     .status(500)

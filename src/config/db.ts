@@ -7,7 +7,11 @@ const pool = new Pool({
   host: env.DB_HOST,
   database: env.DATABASE,
   password: env.DB_PASSWORD,
-  port: env.DB_PORT,
+  port: Number(env.DB_PORT),
+});
+
+pool.connect(() => {
+  console.log("Database is connected");
 });
 
 export default pool;
