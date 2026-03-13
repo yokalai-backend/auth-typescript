@@ -1,10 +1,8 @@
-//Async helper for throw an error through middleware
+//Async helper for throw an error through middleware.
+import type { Request, Response, NextFunction } from "express";
 
-import { ControllersParameters } from "../types/req.res.next";
-
-export default function errorWrapper(
-  fn: Function,
-  { req, res, next }: ControllersParameters,
-) {
-  Promise.resolve(fn(req, res, next)).catch(next);
+export default function errorWrapper(fn: Function) {
+  return function (req: Request, res: Response, next: NextFunction) {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
 }
