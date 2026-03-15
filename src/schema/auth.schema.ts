@@ -6,6 +6,7 @@ export const userOutDb = z
     name: z.string(),
     role: z.string(),
     created_at: z.date(),
+    token: z.string(),
   })
   .transform((u) => ({
     user: {
@@ -13,6 +14,7 @@ export const userOutDb = z
       role: u.role,
       createdAt: u.created_at,
     },
+    token: u.token,
   }));
 
 //Auth validation
