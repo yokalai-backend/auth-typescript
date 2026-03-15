@@ -1,4 +1,5 @@
 //Decide auth schema
+import { access } from "fs";
 import { z } from "zod";
 
 export const userOutDb = z
@@ -6,7 +7,6 @@ export const userOutDb = z
     name: z.string(),
     role: z.string(),
     created_at: z.date(),
-    token: z.string(),
   })
   .transform((u) => ({
     user: {
@@ -14,8 +14,12 @@ export const userOutDb = z
       role: u.role,
       createdAt: u.created_at,
     },
-    token: u.token,
   }));
+
+export const tokensJwt = z.object({
+  accessToken: z.string(),
+  refreshToken: z.string(),
+});
 
 //Auth validation
 export const inputValidation = z.object({
