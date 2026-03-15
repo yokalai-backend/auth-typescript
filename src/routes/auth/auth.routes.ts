@@ -7,6 +7,7 @@ import verifyToken from "../../middleware/verifyToken";
 import registerAuth from "../../controllers/auth/register";
 import loginAuth from "../../controllers/auth/login";
 import refreshAuth from "../../controllers/refresh.auth";
+import getUserData from "../../controllers/test/user.data";
 
 const authRouter = express.Router();
 
@@ -15,10 +16,10 @@ authRouter.post("/register", errorWrapper(registerAuth));
 authRouter.post("/login", errorWrapper(loginAuth));
 
 //Refresh token
-authRouter.post("/refresh", errorWrapper(refreshAuth));
+authRouter.get("/refresh", refreshAuth);
 
 //Protected route
-authRouter.use(verifyToken);
-authRouter.get("/data");
+authRouter.use("/protected", verifyToken);
+authRouter.get("/protected/data", errorWrapper(getUserData));
 
 export default authRouter;

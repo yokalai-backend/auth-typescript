@@ -1,6 +1,7 @@
 //Verify token if valid
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+
 import env from "../config/env";
 
 export default function verifyToken(
@@ -19,10 +20,22 @@ export default function verifyToken(
   try {
     const decoded = (jwt.verify as any)(token, env.JWT_ACCESS_SECRET);
 
-    req.user = decoded;
+    req.user = {
+      id: decoded.id,
+      name: decoded.name,
+      role: decoded.role,
+    };
+
     next();
-  } catch (error) {
-    console.error("Error with jwt", error);
-    return res.status(401).json({ success: false, error: "Token expired" });
+  } catch (error: unknown) {
+    console.error(error);
+
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ success: false, error: "Token expired" });
+    }
+
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ success: false, error: "Invalid token" });
+    }
   }
 }

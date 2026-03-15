@@ -10,6 +10,6 @@ export default function generateAccessToken(user: any) {
       type: "access",
     },
     env.JWT_ACCESS_SECRET,
-    { expiresIn: "5m" },
+    { expiresIn: "1m" },
   );
 }

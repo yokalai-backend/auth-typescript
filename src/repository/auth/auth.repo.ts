@@ -30,7 +30,20 @@ const authRepo = {
     ]);
 
     if (!user) {
-      throw new AppError("User not exist", 404);
+      throw new AppError("Username or password incorrect", 404);
+    }
+
+    return user;
+  },
+
+  refreshUser: async (userId: string) => {
+    const user = await queryOne<UserDb>(
+      "SELECT id, name, role FROM users WHERE id = $1",
+      [userId],
+    );
+
+    if (!user) {
+      throw new AppError("User does not exist", 404);
     }
 
     return user;
