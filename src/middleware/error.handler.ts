@@ -10,6 +10,8 @@ export default async function errorGlobalHandler(
   res: Response,
   next: NextFunction,
 ) {
+  console.error(error);
+
   if (error instanceof AppError) {
     return res
       .status(error.statusCode)
@@ -21,8 +23,6 @@ export default async function errorGlobalHandler(
 
     return res.status(400).json({ success: false, error: formatted.message });
   }
-
-  console.error(error);
 
   return res
     .status(500)

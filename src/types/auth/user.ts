@@ -6,6 +6,7 @@ export interface User {
 type UserRole = "user" | "admin";
 
 export interface UserDb {
+  id: string;
   name: string;
   role: UserRole;
   created_at: string;
