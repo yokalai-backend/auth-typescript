@@ -1,12 +1,12 @@
 //Login logic
-import jwt from "jsonwebtoken";
 import authRepo from "../../repository/auth/auth.repo";
-import env from "../../config/env";
+import generateAccessToken from "../../utils/generate.acces.token";
 
 import { User } from "../../types/auth/user";
 import { verifyPassword } from "../../utils/hash";
 import { AppError } from "../../utils/app.error";
 import { userOutDb, HashFilter } from "../../schema/auth.schema";
+import generateRefreshToken from "../../utils/generate.refresh.token";
 
 export default async function loginService({ name, password }: User) {
   const userDb = await authRepo.login(name);
@@ -17,20 +17,16 @@ export default async function loginService({ name, password }: User) {
     throw new AppError("Username or password incorrect", 401);
   }
 
-  const token = (jwt.sign as any)(
-    {
-      id: userDb.id,
-      name: userDb.name,
-      role: userDb.role,
-    },
-    env.JWT_SECRET,
-    { expiresIn: env.JWT_EXPIRED },
-  );
+  const accessToken = generateAccessToken(userDb);
+  const refreshToken = generateRefreshToken(userDb);
+
+  const userParsed = userOutDb.parse(userDb);
 
   const userOut = {
-    ...userDb,
-    token: token,
+    ...userParsed,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   };
 
-  return userOutDb.parse(userOut);
+  return userOut;
 }
